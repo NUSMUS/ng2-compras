@@ -35,13 +35,22 @@
       </div>
       <div class="form-group">
         <label for="email">Correo Electronico</label>
-        <input type="email" class="form-control" id="email" ngModel name="email">
+        <i class="fa fa-check-circle check" *ngIf="email.valid"></i>
+        <i class="fa fa-exclamation-circle uncheck" *ngIf="email.invalid && email.touched"></i>
+        <input type="text" class="form-control" id="email" ngModel name="email" required email #email="ngModel">
+        <p class="alert alert-danger" *ngIf="email.invalid && email.touched">Por favor introduzca una dirección de correo correcta.</p>
       </div>
       <div class="form-group">
         <label for="contacto">Persona de Contacto</label>
         <input type="text" class="form-control" id="contacto" ngModel name="contacto">
       </div>
       <button type="submit" class="btn btn-success">Añadir Proveedor</button>
+      <hr>
+      <pre>Estado Dirty: {{ formpro.controls.email.dirty }}</pre>
+      <pre>Estado Pristine: {{ formpro.controls.email.pristine }}</pre>
+      <pre>Estado: Touched: {{ formpro.controls.email.touched }}</pre>
+      <pre>Estado: Valid: {{ formpro.controls.email.valid }}</pre>
+      <pre>Estado: Invalid: {{ formpro.controls.email.invalid }}</pre>
     </form>
     <hr>
     <pre>{{ proveedor | json }}</pre>
