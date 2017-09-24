@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset 2">
+    <h2>Añadir nuevo proveedor</h2>
+    <form (ngSubmit)="onSubmit()" #formpro="ngForm">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" ngModel name="nombre">
+      </div>
+      <div class="form-group">
+        <label for="cif">N.R.C.</label>
+        <input type="text" class="form-control" id="nrc" ngModel name="nrc">
+      </div>
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input type="text" class="form-control" id="direccion" ngModel name="direccion">
+      </div>
+      <div class="form-group">
+        <label for="cp">Codigo Postal</label>
+        <input type="text" class="form-control" id="cp" ngModel name="cp">
+      </div>
+      <div class="form-group">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" class="form-control" id="ciudad" ngModel name="ciudad">
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select class="form-control" id="estado" ngModel name="estado">
+          <option value="">Seleccione un estado</option>
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input type="number" class="form-control" id="telefono" ngModel name="telefono">
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Electronico</label>
+        <input type="email" class="form-control" id="email" ngModel name="email">
+      </div>
+      <div class="form-group">
+        <label for="contacto">Persona de Contacto</label>
+        <input type="text" class="form-control" id="contacto" ngModel name="contacto">
+      </div>
+      <button type="submit" class="btn btn-success">Añadir Proveedor</button>
+    </form>
+    <hr>
+    <pre>{{ proveedor | json }}</pre>
+  </div>
+</div>
