@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 export class PresupuestosService {
 
   //Ingresar aqui la ruta de la base de datos FIREBASE
-  presURL = '';
+  presURL = 'https://comprasapp-f3206.firebaseio.com/presupuestos.json';
   constructor(private http: Http) { }
 
   postPresupuesto ( presupuesto: any ) {
@@ -20,5 +20,10 @@ export class PresupuestosService {
         console.log(res.json());
         return res.json();
       })
+  }
+
+  getPresupuestos() {
+    return this.http.get(this.presURL)
+      .map(res => res.json());
   }
 }
