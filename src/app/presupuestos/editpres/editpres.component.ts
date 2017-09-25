@@ -1,39 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
-//Importacion del servicio
 import { PresupuestosService } from '../../../servicios/presupuestos.service';
 
 @Component({
-  selector: 'app-addpres',
-  templateUrl: './addpres.component.html',
-  styleUrls: ['./addpres.component.css']
+  selector: 'app-editpres',
+  templateUrl: './editpres.component.html',
+  styleUrls: ['./editpres.component.css']
 })
-export class AddpresComponent implements OnInit {
+export class EditpresComponent implements OnInit {
 
   presupuestoForm: FormGroup;
   presupuesto: any;
   base: any;
   tipo: any;
-  iva: any = 0;
+  iva: any;
   total: any = 0;
-  //Añadir en el constructor el nuevo servicio
-  constructor( private pf: FormBuilder, private presupuestosService: PresupuestosService ) { }
+
+  id: string;
+  constructor(private pf: FormBuilder, private presupuestoService: PresupuestosService, private router: Router, private activedRouter: ActivatedRoute) {
+    this.activedRouter.params
+      .subscribe(parametros => {
+        this.id = parametros['id'];
+        this.presupuestoService.getPresupuesto(this.id)
+          .subscribe(presupuesto => this.presupuesto = presupuesto)
+      });
+  }
 
   ngOnInit() {
     this.presupuestoForm = this.pf.group ({
-      proveedor: ['', Validators.required ],
-      fecha: ['', Validators.required ],
+      proveedor: ['', Validators.required],
+      fecha: ['',Validators.required],
       concepto: ['',Validators.compose([Validators.required, Validators.minLength(10)])],
-      base: ['', Validators.required ],
-      tipo: ['', Validators.required ],
+      base: ['', Validators.required],
+      tipo: ['', Validators.required],
       iva: this.iva,
       total: this.total
     });
     this.onChanges();
   }
 
-  onChanges(): void {
+  onChanges() {
     this.presupuestoForm.valueChanges.subscribe(valor => {
       this.base = valor.base;
       this.tipo = valor.tipo;
@@ -42,14 +50,12 @@ export class AddpresComponent implements OnInit {
     });
   }
 
-  //Se añade el metodo postPresupuestos del servicio, que enviará el objeto presupuesto del componente
   onSubmit() {
     this.presupuesto = this.savePresupuesto();
-    this.presupuestosService.postPresupuesto(this.presupuesto)
-      .subscribe(newpres => {
-        
+    this.presupuestoService.putPresupuesto(this.presupuesto, this.id)
+      .subscribe(newpre => {
+        this.router.navigate(['/presupuestos'])
       })
-      this.presupuestoForm.reset();
   }
 
   savePresupuesto() {
@@ -64,4 +70,5 @@ export class AddpresComponent implements OnInit {
     };
     return savePresupuesto;
   }
+
 }
