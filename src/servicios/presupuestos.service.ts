@@ -50,4 +50,10 @@ export class PresupuestosService {
         return res.json();
       })
   }
+
+  deletPresupuesto( id$: string) {
+    const url = `${this.presPutURL}/${id$}.json`;
+    return this.http.delete(url)
+      .map(res => res.json());
+  }
 }
