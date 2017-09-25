@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { ProveedoresService } from '../servicios/proveedores.service';
 import { PresupuestosService } from '../servicios/presupuestos.service';
+import { AutenticacionService } from '../servicios/autenticacion.service';
 
 import { AppComponent } from './app.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
@@ -15,6 +16,7 @@ import { AddproveeComponent } from './proveedores/addprovee/addprovee.component'
 import { AddpresComponent } from './presupuestos/addpres/addpres.component';
 import { PresupuestosComponent } from './presupuestos/presupuestos/presupuestos.component';
 import { EditpresComponent } from './presupuestos/editpres/editpres.component';
+import { RegistroComponent } from './autenticacion/registro/registro.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -23,6 +25,7 @@ const routes: Routes = [
   { path: 'addpres', component: AddpresComponent },
   { path: 'presupuestos', component: PresupuestosComponent },
   { path: 'editpres/:id', component: EditpresComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: '**', component: InicioComponent }
 ];
 
@@ -35,7 +38,8 @@ const routes: Routes = [
     AddproveeComponent,
     AddpresComponent,
     PresupuestosComponent,
-    EditpresComponent
+    EditpresComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +50,13 @@ const routes: Routes = [
   ],
   providers: [
     ProveedoresService,
-    PresupuestosService
+    PresupuestosService,
+    AutenticacionService
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+
+}
