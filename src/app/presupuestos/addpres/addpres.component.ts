@@ -10,6 +10,10 @@ export class AddpresComponent implements OnInit {
 
   presupuestoForm: FormGroup;
   presupuesto: any;
+  base: any;
+  tipo: any;
+  iva: any = 0;
+  total: any = 0;
   constructor( private pf: FormBuilder) { }
 
   ngOnInit() {
@@ -19,8 +23,18 @@ export class AddpresComponent implements OnInit {
       concepto: ['',Validators.compose([Validators.required, Validators.minLength(5)])],
       base: ['', Validators.required ],
       tipo: ['', Validators.required ],
-      iva: ['', Validators.required ],
-      total: ['', Validators.required ]
+      iva: this.iva,
+      total: this.total
+    });
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    this.presupuestoForm.valueChanges.subscribe(valor => {
+      this.base = valor.base;
+      this.tipo = valor.tipo;
+      this.presupuestoForm.value.iva = this.base * this.tipo;
+      this.presupuestoForm.value.total = this.base + (this.base * this.tipo);
     });
   }
 
