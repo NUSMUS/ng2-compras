@@ -9,6 +9,8 @@ import { PresupuestosService } from '../servicios/presupuestos.service';
 import { AutenticacionService } from '../servicios/autenticacion.service';
 import { GuardService } from '../servicios/guard.service';
 
+import { FacturasModule } from './facturas/facturas.module';
+
 import { AppComponent } from './app.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -19,6 +21,7 @@ import { PresupuestosComponent } from './presupuestos/presupuestos/presupuestos.
 import { EditpresComponent } from './presupuestos/editpres/editpres.component';
 import { RegistroComponent } from './autenticacion/registro/registro.component';
 import { InisesComponent } from './autenticacion/inises/inises.component';
+import { FacturasComponent } from './facturas/facturas/facturas.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -50,7 +53,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FacturasModule
   ],
   providers: [
     ProveedoresService,
