@@ -1,0 +1,44 @@
+<div *ngIf="cargando" class="text-center" style="padding-top: 60px;">
+  <i class="fa fa-circle-o-notch fa-spin" style="font-size:48px"></i>
+</div>
+<div *ngIf="!cargando">
+  <h3>Listado de proveedores</h3>
+  <a class="btn btn-primary float-md-right" routerLink="/addprovee">Añadir nuevo proveedor</a>
+  <br>
+  <table class="table table-bordered table-striped tabla" style="margin-top:40px;">
+    <thead>
+      <tr class="filters">
+        <th>Nombre</th>
+        <th>NRC</th>
+        <th>Direccion</th>
+        <th>Codigo Postal</th>
+        <th>Ciudad</th>
+        <th>Estado</th>
+        <th>Telefono</th>
+        <th>Email</th>
+        <th>Contacto</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of proveedores">
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.nrc }}</td>
+        <td>{{ proveedor.direccion }}</td>
+        <td>{{ proveedor.cp }}</td>
+        <td>{{ proveedor.ciudad }}</td>
+        <td>{{ proveedor.estado }}</td>
+        <td>{{ proveedor.telefono }}</td>
+        <td><a href="mailto:{{ proveedor.email }}">{{ proveedor.email }}</a></td>
+        <td>{{ proveedor.contacto }}</td>
+        <th>
+          <button type="button" class="btn btn-success" routerLink="/editprov/{{proveedor.id$}}">Editar</button>
+        </th>
+        <td>
+          <button class="btn btn-danger" (click)="eliminarProveedor(proveedor.id$)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

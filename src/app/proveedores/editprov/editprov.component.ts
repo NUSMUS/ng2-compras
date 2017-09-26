@@ -5,23 +5,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProveedoresService } from '../../../servicios/proveedores.service';
 
 @Component({
-  selector: 'app-addprovee',
-  templateUrl: './addprovee.component.html',
-  styleUrls: ['./addprovee.component.css']
+  selector: 'app-editprov',
+  templateUrl: './editprov.component.html',
+  styleUrls: ['./editprov.component.css']
 })
-export class AddproveeComponent implements OnInit {
+export class EditprovComponent implements OnInit {
 
   proveedorForm: FormGroup;
   proveedor: any;
 
+  id: string;
   estados: string[] = [
     'Aguascalintes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango',
     'Guanajuato','Guerrero','Hidalgo','Jalisco','México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo',
     'San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'
   ]
-
-  constructor (private pvf: FormBuilder, private proveedoresService: ProveedoresService) {
-
+  constructor(private pvf: FormBuilder, private proveedorService: ProveedoresService, private router: Router, private activeRouter: ActivatedRoute) {
+    this.activeRouter.params
+      .subscribe(parametros => {
+        this.id = parametros['id'];
+        this.proveedorService.getProveedor(this.id)
+          .subscribe(proveedor => this.proveedor = proveedor)
+      });
   }
 
   ngOnInit() {
@@ -40,11 +45,10 @@ export class AddproveeComponent implements OnInit {
 
   onSubmit() {
     this.proveedor = this.saveProveedor();
-    this.proveedoresService.postProveedor(this.proveedor)
+    this.proveedorService.putProveedor(this.proveedor, this.id)
       .subscribe(newprov => {
-
+        this.router.navigate(['/proveedores'])
       })
-      this.proveedorForm.reset();
   }
 
   saveProveedor() {

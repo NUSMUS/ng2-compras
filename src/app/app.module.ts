@@ -12,7 +12,7 @@ import { GuardService } from '../servicios/guard.service';
 import { FacturasModule } from './facturas/facturas.module';
 
 import { AppComponent } from './app.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { ProveedoresComponent } from './proveedores/proveedores/proveedores.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { HeaderComponent } from './header/header.component';
 import { AddproveeComponent } from './proveedores/addprovee/addprovee.component';
@@ -22,11 +22,13 @@ import { EditpresComponent } from './presupuestos/editpres/editpres.component';
 import { RegistroComponent } from './autenticacion/registro/registro.component';
 import { InisesComponent } from './autenticacion/inises/inises.component';
 import { FacturasComponent } from './facturas/facturas/facturas.component';
+import { EditprovComponent } from './proveedores/editprov/editprov.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [GuardService] },
   { path: 'addprovee', component: AddproveeComponent, canActivate: [GuardService] },
+  { path: 'editprov/:id', component: EditprovComponent, canActivate: [GuardService] },
   { path: 'addpres', component: AddpresComponent, canActivate: [GuardService] },
   { path: 'presupuestos', component: PresupuestosComponent, canActivate: [GuardService] },
   { path: 'editpres/:id', component: EditpresComponent, canActivate: [GuardService] },
@@ -46,7 +48,8 @@ const routes: Routes = [
     PresupuestosComponent,
     EditpresComponent,
     RegistroComponent,
-    InisesComponent
+    InisesComponent,
+    EditprovComponent
   ],
   imports: [
     BrowserModule,

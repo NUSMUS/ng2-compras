@@ -36,7 +36,7 @@ export class PresupuestosService {
       .map(res => res.json());
   }
 
-  putPresupuesto(presupuesto: any, id$:string) {
+  putPresupuesto(presupuesto: any, id$: string) {
     const newpre = JSON.stringify(presupuesto);
     const headers = new Headers ({
       'Content-Type': 'application/json'

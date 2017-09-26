@@ -10,6 +10,7 @@ import { PresupuestosService } from '../../../servicios/presupuestos.service';
 export class PresupuestosComponent implements OnInit {
 
   presupuestos: any[] = [];
+  cargando = true;
   //Devuelve un objeto con todos los presupuestos en el formato FIREBASE
   constructor(private presupuestosService: PresupuestosService) {
     this.presupuestosService.getPresupuestos()
@@ -19,6 +20,7 @@ export class PresupuestosComponent implements OnInit {
           p.id$ = id$;
           this.presupuestos.push(presupuestos[id$]);
         }
+        this.cargando = false;
       })
   }
 
